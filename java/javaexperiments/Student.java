@@ -21,5 +21,9 @@ boolean isAgeEven(){
   return result;
 }
 
+void addAgeByValue(int value){
+age=age+value;
+}
+
 }
 

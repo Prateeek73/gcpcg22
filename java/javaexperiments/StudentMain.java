@@ -5,6 +5,11 @@ Student st1=new Student(1,"aman", 21);
 
 Student st2=new Student(2, "vibhor",22);
 
+st1.age=23;
+st1.addAgeByValue(10);
+
+st2.addAgeByValue(15);
+
 Student students[]=new Student[2];
 students[0]=st1;
 students[1]=st2;
