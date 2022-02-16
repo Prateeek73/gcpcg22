@@ -1,4 +1,4 @@
-**package inheritance, access specifier**
+**package, inheritance, access specifier**
 
 Base Package : com.mycompany
 
