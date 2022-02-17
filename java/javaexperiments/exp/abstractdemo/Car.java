@@ -1,4 +1,4 @@
-package abstractdemo;
+package exp.abstractdemo;
 
 public class Car extends Vehicle{
 

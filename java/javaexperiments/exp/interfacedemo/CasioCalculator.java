@@ -1,4 +1,4 @@
-package interfacedemo;
+package exp.interfacedemo;
 
 public class CasioCalculator implements ICalculator{
 
