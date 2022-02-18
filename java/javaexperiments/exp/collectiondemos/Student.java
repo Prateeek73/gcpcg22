@@ -42,5 +42,28 @@ public int getAge(){
 return age;
 }
 
+/*
+if two objects are equal then their hashcode should be equal
+
+if two objects have equal hashcode, objects may or may not be equal
+*/
+@Override
+public boolean equals(Object arg){
+if(this==arg){
+return true;
+}
+if(arg==null || !(arg instanceof Student)){
+return false;
+}
+Student that=(Student)arg;
+return this.id==that.id;
+
 }
 
+@Override
+public int hashCode(){
+return id;
+}
+
+
+}
