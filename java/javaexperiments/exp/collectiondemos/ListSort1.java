@@ -21,13 +21,20 @@ System.out.println(student.getId()+"-"+student.getName()+"-"+student.getAge());
 }
 
 
-Comparator<Student> comparator=new AgeComparator();
-list.sort(comparator);
-System.out.println("after sorting");
+Comparator<Student> ageComparator=new AgeComparator();
+list.sort(ageComparator);
+System.out.println("after sorting by age");
 for(Student student:list){
 System.out.println(student.getId()+"-"+student.getName()+"-"+student.getAge());
-
 }
+
+Comparator<Student> nameComparator=new NameComparator();
+list.sort(nameComparator);
+System.out.println("after sorting by name");
+for(Student student:list){
+System.out.println(student.getId()+"-"+student.getName()+"-"+student.getAge());
+}
+
 
 }
 }
