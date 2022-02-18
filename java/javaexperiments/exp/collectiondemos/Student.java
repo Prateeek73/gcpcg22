@@ -1,6 +1,6 @@
 package exp.collectiondemos;
 
-class Student{
+class Student {
 
 private int id;
 private String name;
