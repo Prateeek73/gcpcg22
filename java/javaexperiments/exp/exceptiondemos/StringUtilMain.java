@@ -6,7 +6,7 @@ public class StringUtilMain{
 public static void main(String args[]){
 StringUtil util=new StringUtil();
 String str="hello";
-int index=10;
+int index=1;
 try{
 char foundChar=util.getCharAt(str,index);
 System.out.println("found char="+foundChar);
@@ -20,13 +20,19 @@ catch(InvalidIndexException e){
 System.out.println("index is either negative or bigger than string");
 
 }
+
+
 /*
 catch(Exception e){
 e.printStackTrace();
 System.out.println("something went wrong");
 }*/
 
-System.out.println("bye");
+finally{
+
+System.out.println("i will always get executed, things like closing connection etc can be done");
+}
+
 }
 
 
