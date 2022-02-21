@@ -4,7 +4,7 @@ public class Developer extends Employee{
     
     private String createdSoftware;
 
-    Developer(long id, String name, String createdSoftware){
+    public Developer(long id, String name, String createdSoftware){
         super(id, name);
         this.createdSoftware = createdSoftware;
     }
