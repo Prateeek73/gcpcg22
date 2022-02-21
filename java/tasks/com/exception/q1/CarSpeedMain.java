@@ -1,4 +1,4 @@
-package com.exception;
+package com.exception.q1;
 
 public class CarSpeedMain {
 

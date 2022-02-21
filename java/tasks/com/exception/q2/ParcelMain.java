@@ -1,4 +1,4 @@
-package com.exception;
+package com.exception.q2;
 
 public class ParcelMain {
     public static void main(String[] args) {
