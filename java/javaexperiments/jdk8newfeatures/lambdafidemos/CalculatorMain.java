@@ -1,4 +1,4 @@
-package jdk8newfeatures;
+package jdk8newfeatures.lambdafidemos;
 
 public class CalculatorMain {
 
