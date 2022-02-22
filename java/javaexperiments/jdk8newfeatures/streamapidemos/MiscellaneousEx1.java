@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class MiscellaneousEx {
+public class MiscellaneousEx1 {
 	public static void main(String args[]) {
 		List<String>list1=new ArrayList<>();	
 	    list1.add("hello");
@@ -21,6 +21,8 @@ public class MiscellaneousEx {
 	     Stream<String>stream3 =list1.stream()
 	    		    .skip(2);
 	    		     stream3.forEach(System.out::println); 
+	    		     
+	   		     
 	    		
 	}
 }

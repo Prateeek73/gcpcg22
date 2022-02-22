@@ -8,11 +8,11 @@ import java.util.stream.Stream;
 
 public class CollectorEx {
 	public static void main(String args[]) {
-		List<String>list1=new ArrayList<>();	
-	    list1.add("hello");
-	    list1.add("hi");
-	    list1.add("good");
-      
+		List<String> list1 = new ArrayList<>();
+		list1.add("hello");
+		list1.add("hi");
+		list1.add("good");
+
 	    //descending
 	   Stream<String>stream1 =list1.stream();
 	   Set<String>set=stream1.collect(Collectors.toSet());
