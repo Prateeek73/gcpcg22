@@ -6,7 +6,6 @@ public class Vehicle implements Comparable<Vehicle>{
 	public double price;
 	
 	public Vehicle(String name, double price) {
-		super();
 		this.name = name;
 		this.price = price;
 	}

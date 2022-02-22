@@ -4,26 +4,26 @@ import java.util.*;
 
 public class VehicleMain {
 	
-	public static void main(String args[]){
-		List<Vehicle>list=new ArrayList<>();
+	public static void main(String args[]) throws Exception{
+		List<Vehicle> vehicles=new ArrayList<>();
 		//add vehicles in list here
-		list.add(new Vehicle("Supra", 43190.00));
-		list.add(new Vehicle("Bentley", 430554.73 ));
-		list.add(new Vehicle("GTR3", 83190.60));
-		list.add(new Vehicle("Lambo", 93744.00));
+		vehicles.add(new Vehicle("Supra", 43190.00));
+		vehicles.add(new Vehicle("Bentley", 430554.73 ));
+		vehicles.add(new Vehicle("GTR3", 83190.60));
+		vehicles.add(new Vehicle("Lambs", 93744.00));
 
 		VehicleService service=new VehicleService();
 
-		double avgCost=service.averageCost(list);
+		double avgCost=service.averageCost(vehicles);
 		System.out.println(avgCost);
 
-		List<String> ascendingNames = service.fetchVehiclesNameByPriceInAscendingOrder(list);
+		List<String> ascendingNames = service.fetchVehiclesNameByPriceInAscendingOrder(vehicles);
 		System.out.println(ascendingNames);
 
-		List<String> descendingNames = service.fetchVehiclesNameByPriceInDescendingOrder(list);
+		List<String> descendingNames = service.fetchVehiclesNameByPriceInDescendingOrder(vehicles);
 		System.out.println(descendingNames);
 
-		String vehicleName=service.minimumPrice(list);
+		String vehicleName = service.minimumPrice(vehicles);
 		System.out.println(vehicleName);
 	}
 
