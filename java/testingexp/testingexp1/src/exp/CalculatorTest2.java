@@ -1,17 +1,26 @@
 package exp;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class CalculatorTest {
-    Calculator spy;
+@ExtendWith(MockitoExtension.class)
+public class CalculatorTest2 {
+    @Mock
     Adder adder;
+
+    @Spy
+    @InjectMocks
+    Calculator spy;
 
     @BeforeAll
     static void setupBeforeAll() {
@@ -20,10 +29,6 @@ public class CalculatorTest {
 
     @BeforeEach
     public void setup() {
-        Calculator calculator = new Calculator();
-        spy = spy(calculator);
-        adder = mock(Adder.class);
-        spy.setAdder(adder);
         System.out.println("inside setup");
     }
 
@@ -58,6 +63,7 @@ public class CalculatorTest {
         when(adder.sum(-2, -6)).thenReturn(-8);
         int result = spy.add(-2, -6);
         assertEquals(-8, result);
+        verify(adder).sum(-2,-6);
     }
 
     @Test
@@ -66,6 +72,7 @@ public class CalculatorTest {
         doReturn(15).when(spy).add(5, 10);
         int result = spy.addBy10(5);
         assertEquals(15, result);
+        verify(spy).add(5,10);
     }
 
 }
