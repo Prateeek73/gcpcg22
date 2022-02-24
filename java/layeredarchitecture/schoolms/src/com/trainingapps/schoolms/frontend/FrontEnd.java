@@ -1,5 +1,6 @@
 package com.trainingapps.schoolms.frontend;
 
+import java.util.*;
 import com.trainingapps.schoolms.entity.Student;
 import com.trainingapps.schoolms.service.IStudentService;
 import com.trainingapps.schoolms.service.StudentServiceImpl;
@@ -17,9 +18,16 @@ public class FrontEnd {
         int student1Id=student1.getId();
         Student found=service.findById(student1Id);
         display(found);
-        System.out.println("delete student by id");
+        System.out.println("****delete student by id");
         service.deleteById(student1Id);
-
+        System.out.println("****displaying all elements in store");
+        List<Student>all=service.findAll();
+        displayAll(all);
+      }
+    void  displayAll(Collection<Student>students){
+      for(Student student:students){
+          display(student);
+      }
     }
 
     void display(Student student){

@@ -4,6 +4,8 @@ import com.trainingapps.schoolms.dao.IStudentDao;
 import com.trainingapps.schoolms.dao.StudentDaoImpl;
 import com.trainingapps.schoolms.entity.Student;
 
+import java.util.List;
+
 public class StudentServiceImpl implements IStudentService{
     private IStudentDao dao=new StudentDaoImpl();
 
@@ -30,5 +32,11 @@ public class StudentServiceImpl implements IStudentService{
     @Override
     public void deleteById(int id) {
            dao.deleteById(id);
+    }
+
+    @Override
+    public List<Student> findAll() {
+        List<Student>result=dao.findAll();
+        return result;
     }
 }

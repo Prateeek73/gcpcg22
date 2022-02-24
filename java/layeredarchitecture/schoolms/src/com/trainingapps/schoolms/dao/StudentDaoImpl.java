@@ -2,8 +2,7 @@ package com.trainingapps.schoolms.dao;
 
 import com.trainingapps.schoolms.entity.Student;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class StudentDaoImpl implements IStudentDao{
 
@@ -23,5 +22,13 @@ public class StudentDaoImpl implements IStudentDao{
     @Override
     public void deleteById(int id) {
         store.remove(id);
+    }
+
+    @Override
+    public List<Student> findAll() {
+      Collection<Student> values=  store.values();
+       List<Student>list=new ArrayList<>();
+       list.addAll(values);
+       return list;
     }
 }
