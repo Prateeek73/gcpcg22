@@ -2,6 +2,10 @@ package com.trainingapps.schoolms.frontend;
 
 import java.util.*;
 import com.trainingapps.schoolms.entity.Student;
+import com.trainingapps.schoolms.exceptions.InvalidStudentAgeException;
+import com.trainingapps.schoolms.exceptions.InvalidStudentIdException;
+import com.trainingapps.schoolms.exceptions.InvalidStudentNameException;
+import com.trainingapps.schoolms.exceptions.StudentNotFoundException;
 import com.trainingapps.schoolms.service.IStudentService;
 import com.trainingapps.schoolms.service.StudentServiceImpl;
 
@@ -9,6 +13,7 @@ public class FrontEnd {
     private IStudentService service = new StudentServiceImpl();
 
     public void runUI(){
+    	try {
         System.out.println("***adding students");
         Student student1 =service.add("prateek",21);
         Student student2 =service.add("amit",22);
@@ -23,7 +28,30 @@ public class FrontEnd {
         System.out.println("****displaying all elements in store");
         List<Student>all=service.findAll();
         displayAll(all);
+    	}catch(InvalidStudentIdException e) {
+    		//e.printStackTrace();
+    		System.err.println(e.getMessage());
+    	}
+    	catch(InvalidStudentAgeException e) {
+    		//e.printStackTrace();
+    		System.err.println(e.getMessage());
+        		
+    	}
+    	catch(InvalidStudentNameException e) {
+    		//e.printStackTrace();
+    		System.err.println(e.getMessage());
+        	
+    	}
+    	catch(StudentNotFoundException e) {
+    		//e.printStackTrace();
+    		System.err.println(e.getMessage());
+    	}
+    	catch(Exception e){
+    		System.err.println(e.getMessage());
+    	}
+    	
       }
+    
     void  displayAll(Collection<Student>students){
       for(Student student:students){
           display(student);
