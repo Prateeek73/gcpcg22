@@ -40,6 +40,9 @@ ICustomerService{
 
 addCustomer(String firstName, String lastName, double balance)
 
+findById(long id): Customer
+
+
 findCustomersByFirstName(String firstname):List<Customer>
 
 
