@@ -23,6 +23,7 @@ System.out.println(student.getId()+"-"+student.getName()+"-"+student.getAge());
 
 Comparator<Student> ageComparator=new AgeComparator();
 list.sort(ageComparator);
+//Collections.sort(list);
 System.out.println("after sorting by age");
 for(Student student:list){
 System.out.println(student.getId()+"-"+student.getName()+"-"+student.getAge());
