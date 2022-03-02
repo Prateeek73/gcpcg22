@@ -23,7 +23,7 @@ age: int
 
 CustomerService{
 
- List<CustomerDto>    sortCustomersById(List<Customer> list)
+ List< CustomerDto >    sortCustomersById(List< Customer > list)
 
 
 }
