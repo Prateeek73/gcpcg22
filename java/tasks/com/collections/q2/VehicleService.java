@@ -4,48 +4,44 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class VehicleService {
-	
-	
 	double averageCost(List<Vehicle> list){
-		double sum = list.stream()
-                    .mapToDouble(veh -> veh.getPrice())
-                    .sum();
-		
-		return sum / list.size();
+		BinaryOperator<Double> operation = (a,b) -> a+b;
+		Optional<Double> value = list.stream()
+                    .map(veh -> veh.getPrice())
+                    .reduce(operation);
+		if(value.isPresent()){
+			return value.get() / list.size();
+		}
+		return 0;
 	}
-	
 	List<String> fetchVehiclesNameByPriceInAscendingOrder(List<Vehicle> list){
-		Comparator<Vehicle> comparator = (veh1, veh2) -> (int) (veh1.getPrice() - veh2.getPrice());
-
 		List<String> vehicleNameList = list.stream()
-								.sorted(comparator)
-								.map(veh -> veh.getName())
-								.collect(Collectors.toList());
-								
+			.sorted(getAscendingComparator())
+			.map(veh -> veh.getName())
+			.collect(Collectors.toList());					
 		return vehicleNameList;
 	}
-
 	List<String> fetchVehiclesNameByPriceInDescendingOrder(List<Vehicle> list) throws VehicleNotFoundException{
-		Comparator<Vehicle> comparator = (veh1, veh2) -> (int) (veh2.getPrice() - veh1.getPrice());
-
 		List<String> vehicleNameList = list.stream()
-										.sorted(comparator)
-										.map(veh -> veh.name)
-										.collect(Collectors.toList());
-								
+			.sorted(getDescendingComparator())
+			.map(veh -> veh.name)
+			.collect(Collectors.toList());					
 		return vehicleNameList;
 	}
-	
+	public Comparator<Vehicle> getAscendingComparator(){
+		Comparator<Vehicle> comparator = (veh1, veh2) -> Double.valueOf(veh1.getPrice()).compareTo(veh2.getPrice());
+		return comparator;
+	}
+	public Comparator<Vehicle> getDescendingComparator(){
+		Comparator<Vehicle> comparator = (veh1, veh2) -> (int) (veh2.getPrice() - veh1.getPrice());
+		return comparator;
+	}
 	public String minimumPrice(List<Vehicle> list) throws VehicleNotFoundException{
-		Comparator<Vehicle> comparator = (veh1, veh2) -> (int) (veh1.getPrice() - veh2.getPrice());
-
 		Optional<Vehicle> optional = list.stream()
-										.min(comparator);
+			.min(getAscendingComparator())
 		if(optional.isPresent()){
 			return optional.get().getName();
 		}
-		else{
-			throw new VehicleNotFoundException("Vehicle Not Found");
-		}
+		throw new VehicleNotFoundException("Vehicle Not Found");
 	}
 }

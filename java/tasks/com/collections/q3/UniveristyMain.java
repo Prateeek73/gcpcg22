@@ -2,7 +2,7 @@ package com.collections.q3;
 
 public class UniveristyMain {
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws Exception{
 
 		University university = new University();
 		// add students in university here

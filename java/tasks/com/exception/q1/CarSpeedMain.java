@@ -9,12 +9,12 @@ public class CarSpeedMain {
             service.assignCarSpeed(car, 80);
         }
         catch(InvalidSpeedException ex){
-            ex.getStackTrace();
-            System.out.println(ex.getMessage());
+            //ex.getStackTrace();
+            System.err.println(ex.getMessage());
         }
         catch(Exception ex){
-            ex.getStackTrace();
-            System.out.println(ex.getMessage());    
+            //ex.getStackTrace();
+            System.err.println(ex.getMessage());    
         }
         System.out.println("Car: {vehicleNumber:" + car.vehicleNumber + ", speed:" + car.speed + "}");
     }

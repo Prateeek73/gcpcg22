@@ -1,4 +1,4 @@
-package com.t3ccompany;
+package com.t3company;
 
 public class EmployeeMain extends EmployeeServiceImpl{
     public static void main(String[] args){

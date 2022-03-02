@@ -4,21 +4,16 @@ import java.util.*;
 
 public class Service {
 
-	List<Integer> list;
-
-	public Service() {
-		this.list = new ArrayList<>();
-	}
-
 	public ArrayList<Integer> makeArrayListInt(int n) {
+		ArrayList<Integer> list = new ArrayList<>();
 		for (int i = 0; i < n; i++)
-			this.list.add(0);
-		return (ArrayList<Integer>) this.list;
+			list.add(0);
+		return list;
 	}
 
 	public ArrayList<Integer> reverseList(ArrayList<Integer> list) {
-		Collections.reverse(this.list);
-		return (ArrayList<Integer>) this.list;
+		Collections.reverse(list);
+		return list;
 	}
 
 	public ArrayList<Integer> changeList(ArrayList<Integer> list, int m, int n) {
@@ -27,6 +22,6 @@ public class Service {
 				list.set(i, n);
 			}
 		}
-		return (ArrayList<Integer>) this.list;
+		return list;
 	}
 }

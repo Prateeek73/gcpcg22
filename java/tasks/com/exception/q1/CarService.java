@@ -12,8 +12,6 @@ public class CarService {
             car.speed = str_speed;
             return str_speed;
         }
-        else{
-            throw new InvalidSpeedException("Invalid Speed");
-        }
+        throw new InvalidSpeedException("Invalid Speed");
     }
 }

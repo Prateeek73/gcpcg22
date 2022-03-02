@@ -7,7 +7,6 @@ public class University {
 	public List<Student> students;
 
 	public University() {
-		super();
 		this.students = new ArrayList<>();
 	}
 	
@@ -20,12 +19,12 @@ public class University {
 			Student student = students.get(i);
 			if (student.getScore() >= 85) {
 				student.setAward(1000);
-			} else if (student.getScore() >= 75) {
+			}
+			if (student.getScore() >= 75 && student.getScore()<85) {
 				student.setAward(500);
-			} else if (student.getScore() < 60) {
+			}
+			if (student.getScore() < 60) {
 				student.setAward(0);
-			} else {
-
 			}
 		}
 	}
@@ -38,15 +37,16 @@ public class University {
 		// return sum;
 
 		double sum  = students.stream()
-								.mapToDouble(student -> student.getAward())
-								.sum();
+								.map(student -> student.getAward())
+								.reduce((o1, o2) -> o1 + o2);
 		return sum;
 	}
 
 	public String findDeparmentWithHighestTotalAward() throws DepartmentNotFoundException{
 		HashMap<String, Double> department_award = new HashMap<>();
 		for (Student student : students) {
-			department_award.put(student.getName(), department_award.getOrDefault(student.getName(), (double) 0) + student.getAward());
+			double value = department_award.getOrDefault(student.getDepartment(), 0.0) + student.getAward();
+			department_award.put(student.getDepartment(), value);
 		}
 
 		// String max_department = "";
@@ -61,16 +61,13 @@ public class University {
 
 		Comparator<Entry<String, Double>> comparator = (o1, o2) -> o1.getValue().compareTo(o2.getValue());
 
-
 		Optional<Entry<String, Double>> entrySet = department_award.entrySet()
 														.stream()
 														.max(comparator);
 		if(entrySet.isPresent()){
 			return entrySet.get().getKey();
 		}
-		else{
-			throw new DepartmentNotFoundException("Department not found");
-		}
+		throw new DepartmentNotFoundException("Department not found");
 
 	}
 

@@ -1,4 +1,4 @@
-package com.t3ccompany;
+package com.t3company;
 
 class Employee{
     private long id;
