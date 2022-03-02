@@ -10,7 +10,6 @@ public class DefaultInputOutputConseoleEx {
     }
 
     public void execute() {
-
         InputStream defaultInputStream = System.in;
         Reader reader = new InputStreamReader(defaultInputStream);
         OutputStream defaultOutputStream = System.out;
@@ -21,8 +20,7 @@ public class DefaultInputOutputConseoleEx {
                 writer.write(redChar);
             }
             writer.flush();
-        } catch (
-                FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
