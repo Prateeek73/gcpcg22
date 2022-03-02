@@ -1,6 +1,6 @@
 package exp.collectiondemos;
 
-class Student {
+class Student implements Comparable<Student>{
 
 private int id;
 private String name;
@@ -59,6 +59,11 @@ Student that=(Student)arg;
 return this.id==that.id;
 
 }
+@Override
+public int compareTo(Student that){
+return this.age-that.age;
+}
+
 
 @Override
 public int hashCode(){
