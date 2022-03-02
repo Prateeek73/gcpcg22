@@ -3,6 +3,11 @@ package exp.doselect;
 import java.util.*;
 
 class MobileProblemSolution {
+public static void main(String args[]){
+        Mobile mobile=new Mobile();
+        //do operations and verify
+        //
+    }
 }
 
 class Mobile {
