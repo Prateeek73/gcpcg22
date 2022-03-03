@@ -13,7 +13,7 @@ public class CustomerMain {
         list.add(customer1);
         list.add(customer2);
         CustomerService service = new CustomerService();
-        Optional<Customer> optional = service.findYoungestCustomer(list);
+        Optional<Customer> optional = service.findYoungestCustomerWay2(list);
         if (optional.isPresent()) {
             Customer customer = optional.get();
             System.out.println(customer.getId() + " " + customer.getName() + " " + customer.getAge());
