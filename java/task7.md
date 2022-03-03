@@ -20,13 +20,15 @@ Issue{
 
 IssueService{
 
-findIssueWithLowestPriority(): Optional < Issue >
+issues: List< Issues >
 
-Map < IssueStatus , List < Issue > > mapIssuesByStatus(Collection < Issue > issues)
+findIssueWithLowestPriority( ): Optional < Issue >
+
+Map < IssueStatus , List < Issue > > mapIssuesByStatus()
  
-findTotalPriorityValue(): Optional < Long >
+findTotalPriorityValue( ): Optional < Long >
 
-findTotalPriorityValueByStatus(IssueStatus status) : Optional < Long >
+findTotalPriorityValueByStatus( IssueStatus status) : Optional < Long >
  
 
 }
