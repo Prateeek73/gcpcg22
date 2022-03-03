@@ -1,0 +1,41 @@
+
+enum IssueStatus{
+
+OPEN,
+
+CLOSED
+
+}
+
+
+Issue{
+
+ status: IssueStatus
+ 
+ priorityValue: int  
+
+
+}
+
+
+IssueService{
+
+findIssueWithLowestPriority(): Issue
+
+Map < IssueStatus , List < Issue > > mapIssuesByStatus(Collection < Issue > issues)
+ 
+findTotalPriorityValue(): long
+
+findTotalPriorityValueByStatus(IssueStatus status) : long
+ 
+
+}
+
+
+Main Class {
+
+verify IssueService operations are working properly
+
+}
+
+
