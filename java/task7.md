@@ -12,7 +12,7 @@ Issue{
 
  status: IssueStatus
  
- priorityValue: int  
+ priorityValue: int 
 
 
 }
@@ -20,13 +20,13 @@ Issue{
 
 IssueService{
 
-findIssueWithLowestPriority(): Issue
+findIssueWithLowestPriority(): Optional < Issue >
 
 Map < IssueStatus , List < Issue > > mapIssuesByStatus(Collection < Issue > issues)
  
-findTotalPriorityValue(): long
+findTotalPriorityValue(): Optional < Long >
 
-findTotalPriorityValueByStatus(IssueStatus status) : long
+findTotalPriorityValueByStatus(IssueStatus status) : Optional < Long >
  
 
 }
