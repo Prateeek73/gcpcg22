@@ -6,6 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.mockito.Mockito.*;
 
@@ -68,6 +70,28 @@ public class CalculatorTest1 {
         int result = spy.addBy10(5);
         assertEquals(15, result);
         verify(spy).add(5,10);
+    }
+
+    /**
+     * scenario : number is even
+     */
+    @ValueSource(ints = {10, 100,128})
+    @ParameterizedTest
+    public void testIsEven_1(int input){
+        System.out.println("inside estIsEven_1 input "+input);
+        boolean result=spy.isEven(input);
+        assertTrue(result);
+    }
+
+    /**
+     * scenario : number is odd
+     */
+    @ValueSource(ints = {11, 111,121})
+    @ParameterizedTest
+    public void testIsEven_2(int input){
+        System.out.println("inside estIsEven_1 input "+input);
+        boolean result=spy.isEven(input);
+        assertFalse(result);
     }
 
 }
