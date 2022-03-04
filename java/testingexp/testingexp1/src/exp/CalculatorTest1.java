@@ -2,10 +2,7 @@ package exp;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -92,6 +89,11 @@ public class CalculatorTest1 {
         System.out.println("inside estIsEven_1 input "+input);
         boolean result=spy.isEven(input);
         assertFalse(result);
+    }
+
+    @Disabled
+    public void testExperiment(){
+        System.out.println("this test has got diabled and you wont see this line in log");
     }
 
 }
