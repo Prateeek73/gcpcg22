@@ -14,6 +14,7 @@
 			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password" value="scooby" />
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
 			<!-- create, create-drop, validate, update -->
 			<property name="hibernate.hbm2ddl.auto" value="create"/>
 		</properties>
