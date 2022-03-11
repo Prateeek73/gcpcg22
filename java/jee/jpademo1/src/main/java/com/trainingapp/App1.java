@@ -59,7 +59,7 @@ public class App1 {
     }
 
     void display(Trainee trainee) {
-        System.out.println("trainee inserted " + trainee.getId() + "-" + trainee.getName() + "-" + trainee.getAge());
+        System.out.println("trainee inserted " + trainee.getId() + "-" + trainee.getTraineeName() + "-" + trainee.getTraineeAge());
 
     }
 

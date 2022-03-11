@@ -1,9 +1,8 @@
 package com.trainingapp;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 public class App2 {
     private EntityManagerFactory emf;
@@ -32,20 +31,24 @@ public class App2 {
         display(trainee1);
 
 
-        Trainee traineeUpdate = update(trainee2Id,"hash khuashwaha", 21);
-        System.out.println("****trainee updated ");
-        display(traineeUpdate);
+        System.out.println("*****find trainee by name");
+        List<Trainee> list = findByName("harshit");
+        displayAll(list);
+
+        System.out.println("********trainees with min age 22");
+       List<Trainee>traineesWithMinAge =findTraineesWithAgeGreaterThan(22);
+        displayAll(traineesWithMinAge);
 
         entityManager.close();
         emf.close();
     }
 
     Trainee update(int id, String name, int age) {
-        Trainee trainee=new Trainee(name,age);
+        Trainee trainee = new Trainee(name, age);
         trainee.setId(id);
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        trainee=entityManager.merge(trainee);
+        trainee = entityManager.merge(trainee);
         transaction.commit();
         return trainee;
     }
@@ -53,6 +56,22 @@ public class App2 {
     Trainee findById(int id) {
         Trainee trainee = entityManager.find(Trainee.class, id);
         return trainee;
+    }
+
+    List<Trainee> findTraineesWithAgeGreaterThan(int ageArg){
+        String ql="from Trainee where traineeAge >= :minAge";
+        TypedQuery<Trainee>query=entityManager.createQuery(ql,Trainee.class);
+        query.setParameter("minAge",ageArg);
+        List<Trainee>list=query.getResultList();
+       return list;
+    }
+
+    List<Trainee> findByName(String nameArg) {
+        String queryText = "from Trainee where traineeName=:traineeName";
+        TypedQuery<Trainee> query = entityManager.createQuery(queryText, Trainee.class);
+        query.setParameter("traineeName", nameArg);
+        List<Trainee> list = query.getResultList();
+        return list;
     }
 
     Trainee insert(String name, int age) {
@@ -64,18 +83,23 @@ public class App2 {
         return trainee;
     }
 
-    void deleteById(int id){
-        Trainee trainee=findById(id);
-        EntityTransaction transaction=entityManager.getTransaction();
+    void deleteById(int id) {
+        Trainee trainee = findById(id);
+        EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.remove(trainee);
         transaction.commit();
 
     }
 
+    void displayAll(Collection<Trainee> trainees){
+        for (Trainee trainee:trainees){
+            display(trainee);
+        }
+    }
 
     void display(Trainee trainee) {
-        System.out.println("trainee inserted " + trainee.getId() + "-" + trainee.getName() + "-" + trainee.getAge());
+        System.out.println("trainee inserted " + trainee.getId() + "-" + trainee.getTraineeName() + "-" + trainee.getTraineeAge());
 
     }
 
