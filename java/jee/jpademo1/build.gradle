@@ -37,7 +37,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.trainingapp.App'
+    mainClass = 'com.trainingapp.App2'
 }
 
 tasks.named('test') {
