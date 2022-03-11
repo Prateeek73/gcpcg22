@@ -34,7 +34,7 @@ public class App1 {
 
         Trainee fetched=entityManager.find(Trainee.class,trainee1Id);
         System.out.println("***diplaying fetched trainee details with id "+trainee1Id);
-        display(trainee1);
+        display(fetched);
 
 
         EntityTransaction transaction2=entityManager.getTransaction();
