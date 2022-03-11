@@ -64,6 +64,15 @@ public class App2 {
         return trainee;
     }
 
+    void deleteById(int id){
+        Trainee trainee=findById(id);
+        EntityTransaction transaction=entityManager.getTransaction();
+        transaction.begin();
+        entityManager.remove(trainee);
+        transaction.commit();
+
+    }
+
 
     void display(Trainee trainee) {
         System.out.println("trainee inserted " + trainee.getId() + "-" + trainee.getName() + "-" + trainee.getAge());
