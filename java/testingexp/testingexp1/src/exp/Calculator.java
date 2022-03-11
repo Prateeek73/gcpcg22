@@ -23,4 +23,9 @@ public class Calculator {
         int result=add(num,10);
         return result;
     }
+
+    public boolean isEven(int num){
+        return num%2==0;
+    }
+
 }
