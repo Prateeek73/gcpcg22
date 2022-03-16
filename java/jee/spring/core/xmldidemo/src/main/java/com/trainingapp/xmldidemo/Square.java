@@ -1,15 +1,9 @@
-package com.trainingapp.javaconfigdemo;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+package com.trainingapp.xmldidemo;
 
 
 public class Square implements IShape{
 
-    //@Value("${square.side}")
+
     private double side;
 
     public Square(){}
@@ -18,14 +12,22 @@ public class Square implements IShape{
         this.side = side;
     }
 
-    @PostConstruct
+
     public void afterInit(){
         System.out.println("Square: inside afterinit, side="+side);
     }
 
-    @PreDestroy
+
     public void save(){
         System.out.println("Square: inside save");
+    }
+
+    public double getSide() {
+        return side;
+    }
+
+    public void setSide(double side) {
+        this.side = side;
     }
 
     @Override
