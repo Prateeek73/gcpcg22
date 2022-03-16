@@ -15,13 +15,18 @@ public class Trainee {
     @Column(name="tage")
     private int traineeAge;
 
+    @JoinColumn(name="address_id_fk")
+    @OneToOne
+    private Address address;
+
     public Trainee(){
 
     }
 
-    public Trainee(String name, int age){
+    public Trainee(String name, int age,Address address){
         this.traineeName = name;
         this.traineeAge =age;
+        this.address = address;
     }
 
     public Integer getId() {
@@ -46,6 +51,14 @@ public class Trainee {
 
     public void setTraineeAge(int traineeAge) {
         this.traineeAge = traineeAge;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override

@@ -1,0 +1,20 @@
+package com.trainingapp.javaconfigdemo;
+
+public class Rectangle implements IShape{
+
+    private double len,breadth;
+
+    public Rectangle(){
+
+    }
+
+    public Rectangle(double len, double breadth){
+        this.len = len;
+        this.breadth=breadth;
+    }
+
+    @Override
+    public double area() {
+        return len*breadth;
+    }
+}
