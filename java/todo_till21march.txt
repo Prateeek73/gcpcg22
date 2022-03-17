@@ -1,0 +1,10 @@
+sprints/ Steps
+
+
+1)sudy+practice on layered architecture
+2)study + practice on jpa/hibernate
+3)study + practice on spring core
+4)upgrade layered architecture task to spring DI layered architecture task
+5)study+practice spring boot
+6)upgrade spring layered architecture task to springboot layered architecture task
+7)integrated jpa/hibernate in spring bootlayered architecture tasks
