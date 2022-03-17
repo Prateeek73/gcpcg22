@@ -10,12 +10,12 @@ import javax.annotation.PostConstruct;
 @ComponentScan("com.trainingapp.javaconfigdemo")
 @Configuration
 public class JavaConfig {
-
+/*
     @Scope("prototype")
     @Bean
     public Square square(){
         return new Square(6);
     }
-
+*/
 
 }
