@@ -1,23 +1,15 @@
 1. List of Operations --> 6/6 testcases
-._.
 
 2. Mobile Shop --> 9/9 testcases
-._.
 
 3. Handling Stuff --> 4/7 testcases
-._.
 
 4. Job Agency --> 7/11 testcases
-._.
 
 5. Employee Verification Code **
-+_+
 
 6. Hiring On! --> 6/8 testcases
--_-
 
 7. Email Operation --> 4/6 testcases
-._.
 
 8. Validating Users --> 9/11 testcases
-._.

@@ -1,5 +1,7 @@
 import java.util.*;
-import java.util.stream.Collectors;  
+import java.util.stream.Collectors;
+import java.util.Collection;
+import java.util.Optional;
 
 class Candidate{
     private int id; 
@@ -69,59 +71,58 @@ class Candidate{
 
 class Implementation{
   public static Map<String, Long> getCount(List<Candidate> list){
-    Map<String, Long> genderMap = new HashMap<>();
-    Set<String> gendersList = list.stream()
-								.map(Candidate::getGender)
-								.sorted(String::compareTo)
-								.collect(Collectors.toSet());
-    for(String gender : gendersList){
-		long genderCount = list.stream()
-							.filter(o -> o.getGender().equals(gender))
-							.count();
-      if(genderCount != 0){
-		genderMap.put(gender, genderCount);
-      }
-    }
+	Map<String, Long> genderMap = new HashMap<>();
+    for(Candidate candidate : list){
+		String gender = candidate.getGender();
+		int previousCount = genderMap.getOrDefault(gender, 0);
+		genderMap.put(gender, previousCount + 1);	
+	}
     return genderMap;
   }
   public static Map<String, Double> getAverageAge(List<Candidate> list){
-    Map<String, Double> genderMap = new HashMap<>();
-    Set<String> gendersList = list.stream()
-								.map(Candidate::getGender)
-								.sorted(String::compareTo)
-								.collect(Collectors.toSet());
-    for(String gender : gendersList){
-      long genderCount = list.stream()
-							.filter(o -> o.getGender().equals(gender))
-							.count();
-      Optional<Integer> genderAgeSum = list.stream()
-										.filter(o -> o.getGender().equals(gender))
-										.map(o -> o.getAge())
-                    					.reduce(Integer::sum);
-      if(genderAgeSum.isPresent() && genderAgeSum.get() != 0){
-        genderMap.put(gender, (double) genderAgeSum.get() / genderCount);
-      }
-    }
-    return genderMap;
+    Map<String, Long> genderMapCount = new HashMap<>();
+	Map<String, Long> genderMapSum = new HashMap<>();
+    for(Candidate candidate : list){
+		String gender = candidate.getGender();
+		int previousCount = genderMapCount.getOrDefault(gender, 0);
+		int previousAgeSum = genderMapSum.getOrDefault(gender, 0);
+		int age = candidate.getAge();
+		genderMapCount.put(gender, previousCount + 1);
+		genderMapSum.put(gender, previousAgeSum + age);
+	}
+	
+	Map<String, Double> genderMapAverage = new HashMap<>();
+	for(String gender : genderMapSum.keySet()){
+		double average = genderMapSum.get(gender) / genderMapCount.get(gender);
+		genderMapAverage.put(gender, average);
+	}
+	return genderMapAverage;
+	
   }
   public static Map<String, Long> countCandidatesDepartmentWise(List<Candidate> list){
-    Map<String, Long> departmentMap = new HashMap<>();
-    Set<String> departmentList = list.stream()
-									.map(Candidate::getDepartment)
-									.sorted(String::compareTo)
-									.collect(Collectors.toSet());
-    for(String department : departmentList){
-      long departmentCount = list.stream()
-								.filter(o -> o.getDepartment().equals(department))
-								.count();
-      if(departmentCount != 0){
-        departmentMap.put(department, departmentCount);
-      }
-    }
-    return departmentMap;
+    	Map<String, Long> departmentCandidateCountMap = new HashMap<>();
+    	for(Candidate candidate : list){
+		String department = candidate.getDepartment();
+		int previousCount = departmentCandidateCountMap .getOrDefault(department , 0);
+		departmentCandidateCountMap .put(gender, previousCount + 1);	
+	}
+    return departmentCandidateCountMap ;
   }
   public static Optional<Candidate> getYoungestCandidateDetails(List<Candidate> list){
-      return list.stream().max((o1, o2) -> o1.getAge() - o2.getAge());
+		int minAge = Integer.MAX_VALUE;
+		Customer found = null;
+		for(Customer customer : list){
+			if(customer.getAge() < minAge){
+				found = customer;
+			}
+		}
+		Optional<Customer> optional;
+		if(found == null){
+			optional = Optional.empty();
+			return optional;
+		}
+		optional = Optional.of(found);
+		return optional;	
   }
 }
 
