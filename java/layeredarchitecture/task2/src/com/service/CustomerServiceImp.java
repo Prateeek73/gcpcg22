@@ -1,11 +1,10 @@
 package com.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import com.dao.ICustomerDAO;
-import com.dao.CustomerDAOImpl;
+import com.dao.StudentCustomerImpl;
 import com.entity.Customer;
 import com.exceptions.IdNotFoundException;
 import com.exceptions.InvalidBalanceException;
@@ -13,7 +12,7 @@ import com.exceptions.InvalidNameException;
 
 public class CustomerServiceImp implements ICustomerService {
 	
-	private ICustomerDAO dao = new CustomerDAOImpl();
+	private ICustomerDAO dao = new StudentCustomerImpl();
 	private static long generateId = 0;
 	
 	long generateId(){
@@ -50,12 +49,5 @@ public class CustomerServiceImp implements ICustomerService {
 		customer.setBalance(customer.getBalance() - value);
 		return customer;
 	}
-	
-//	public Customer updateCustomer(Customer customer) {
-//		Collection<Customer> store = dao.store;
-//		Customer q_customer = store.get(customer.getId());
-//		store.put(customer.getId(), customer);
-//		return q_customer;
-//	}
 
 }
