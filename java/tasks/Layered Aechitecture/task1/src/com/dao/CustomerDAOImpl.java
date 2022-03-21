@@ -9,7 +9,7 @@ import java.util.Map;
 import com.entity.Customer;
 import com.exceptions.IdNotFoundException;
 
-public class StudentCustomerImpl implements ICustomerDAO{
+public class CustomerDAOImpl implements ICustomerDAO{
     
 	private Map<Long, Customer> store=new HashMap<>();
 

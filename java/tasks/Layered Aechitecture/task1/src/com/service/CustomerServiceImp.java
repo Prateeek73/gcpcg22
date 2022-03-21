@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dao.ICustomerDAO;
-import com.dao.StudentCustomerImpl;
+import com.dao.CustomerDAOImpl;
 import com.entity.Customer;
 import com.exceptions.IdNotFoundException;
 import com.exceptions.InvalidBalanceException;
@@ -12,7 +12,7 @@ import com.exceptions.InvalidNameException;
 
 public class CustomerServiceImp implements ICustomerService {
 	
-	private ICustomerDAO dao = new StudentCustomerImpl();
+	private ICustomerDAO dao = new CustomerDAOImpl();
 	private static long generateId = 0;
 	
 	long generateId(){
