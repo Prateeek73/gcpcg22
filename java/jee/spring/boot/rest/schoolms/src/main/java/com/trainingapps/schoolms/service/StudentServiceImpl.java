@@ -1,5 +1,6 @@
 package com.trainingapps.schoolms.service;
 
+import com.trainingapps.schoolms.constants.CourseType;
 import com.trainingapps.schoolms.dao.IStudentDao;
 import com.trainingapps.schoolms.dao.StudentDaoImpl;
 import com.trainingapps.schoolms.entity.Student;
@@ -26,12 +27,12 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	@Override
-	public Student add(String name, int age) 
+	public Student add(String name, int age, CourseType course)
 			throws InvalidStudentNameException, InvalidStudentAgeException {
 		validateName(name);
 		validateAge(age);
 		int id = generateId();
-		Student student = new Student(id, name, age);
+		Student student = new Student(id, name, age,course);
 		dao.add(student);
 		return student;
 	}

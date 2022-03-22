@@ -28,7 +28,9 @@ public class StudentController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/add")
     public StudentDetails add(@RequestBody RegisterStudentRequest requestData) throws Exception {
-        Student student = service.add(requestData.getName(), requestData.getAge());
+        String courseText= requestData.getCourse();
+        CourseType course=studentUtil.toEnum(courseText);
+        Student student = service.add(requestData.getName(), requestData.getAge(),course);
         StudentDetails response=studentUtil.toStudentDetails(student);
         return response;
     }

@@ -3,6 +3,7 @@ package com.trainingapps.schoolms.util;
 import com.trainingapps.schoolms.constants.CourseType;
 import com.trainingapps.schoolms.dto.StudentDetails;
 import com.trainingapps.schoolms.entity.Student;
+import com.trainingapps.schoolms.exceptions.InvalidCourseException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,6 +28,17 @@ public class StudentUtil {
             desired.add(response);
         }
         return desired;
+    }
+
+    public CourseType toEnum(String input){
+        CourseType values[]=CourseType.values();
+        for (CourseType iterated:values){
+            String iteratedText=iterated.toString();
+            if(iteratedText.equalsIgnoreCase(input)){
+                return iterated;
+            }
+        }
+        throw new InvalidCourseException("invalid course");
     }
 
 }

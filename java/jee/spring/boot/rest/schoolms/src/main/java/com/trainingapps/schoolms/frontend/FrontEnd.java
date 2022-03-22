@@ -1,6 +1,8 @@
 package com.trainingapps.schoolms.frontend;
 
 import java.util.*;
+
+import com.trainingapps.schoolms.constants.CourseType;
 import com.trainingapps.schoolms.entity.Student;
 import com.trainingapps.schoolms.exceptions.InvalidStudentAgeException;
 import com.trainingapps.schoolms.exceptions.InvalidStudentIdException;
@@ -20,8 +22,8 @@ public class FrontEnd {
     public void runUI(){
     	try {
         System.out.println("***adding students");
-        Student student1 =service.add("prateek",21);
-        Student student2 =service.add("amit",22);
+        Student student1 =service.add("prateek",21, CourseType.CSE);
+        Student student2 =service.add("amit",22,CourseType.ECE);
         display(student1);
         display(student2);
         System.out.println("***displaying student by id");

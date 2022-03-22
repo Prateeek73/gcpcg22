@@ -8,6 +8,14 @@ public class StudentDetails {
 
     public StudentDetails(){}
 
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
     public StudentDetails(int id, String name, int age, String course){
         this.id=id;
         this.name=name;
