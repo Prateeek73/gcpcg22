@@ -27,8 +27,10 @@ public class CustomerDAOImpl implements ICustomerDAO{
 	}
 
 	@Override
-	public Customer updateCustomer(Customer customer) {
+	public Customer updateCustomer(Customer customer) throws IdNotFoundException {
 		Customer q_customer = store.get(customer.getId());
+		if(q_customer == null)
+			throw new IdNotFoundException("ID not found");
 		store.put(customer.getId(), customer);
 		return q_customer;
 	}

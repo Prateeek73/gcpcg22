@@ -7,7 +7,6 @@ import com.trainingapps.schoolms.exceptions.InvalidStudentIdException;
 import com.trainingapps.schoolms.exceptions.InvalidStudentNameException;
 import com.trainingapps.schoolms.exceptions.StudentNotFoundException;
 import com.trainingapps.schoolms.service.IStudentService;
-import com.trainingapps.schoolms.service.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

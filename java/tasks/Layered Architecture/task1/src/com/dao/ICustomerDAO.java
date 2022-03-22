@@ -11,7 +11,7 @@ public interface ICustomerDAO {
 	
 	Customer findById(long id) throws IdNotFoundException;
 	
-	Customer updateCustomer(Customer customer);
+	Customer updateCustomer(Customer customer) throws IdNotFoundException;
     
 	List<Customer> findAll();
   

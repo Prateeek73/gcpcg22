@@ -31,7 +31,6 @@ public class CustomerServiceImp implements ICustomerService {
 
 	@Override
 	public Customer findById(long id) throws IdNotFoundException {
-//		Customer customer = dao.findById(id);
 		return dao.findById(id);
 	}
 
