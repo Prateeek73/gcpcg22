@@ -30,11 +30,11 @@ public class StudentUtil {
         return desired;
     }
 
-    public CourseType toEnum(String input){
+    public CourseType toEnum(String courseText){
         CourseType values[]=CourseType.values();
         for (CourseType iterated:values){
             String iteratedText=iterated.toString();
-            if(iteratedText.equalsIgnoreCase(input)){
+            if(iteratedText.equalsIgnoreCase(courseText)){
                 return iterated;
             }
         }
