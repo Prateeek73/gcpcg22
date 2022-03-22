@@ -3,9 +3,12 @@ package com.trainingapps.schoolms.controller;
 import com.trainingapps.schoolms.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.validation.ConstraintViolationException;
 
 @Component
 @RestControllerAdvice
@@ -21,7 +24,9 @@ public class CentralizedExceptionHandler {
     @ExceptionHandler({
             InvalidStudentAgeException.class,
             InvalidStudentIdException.class,
-            InvalidStudentNameException.class
+            InvalidStudentNameException.class,
+            MethodArgumentNotValidException.class,
+            ConstraintViolationException.class
     })
     public String handleInvalid(Exception e){
         return e.getMessage();

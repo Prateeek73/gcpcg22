@@ -11,9 +11,11 @@ import com.trainingapps.schoolms.service.IStudentService;
 import com.trainingapps.schoolms.util.StudentUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RequestMapping("/students")
 @RestController
@@ -27,14 +29,11 @@ public class StudentController {
 
 
     //effective url =/students/add ,
-   // @RequestMapping(path="/add",method=RequestMethod.POST)
+    // @RequestMapping(path="/add",method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/add")
     public StudentDetails add(@RequestBody RegisterStudentRequest requestData) throws Exception {
-        String courseText= requestData.getCourse();
-        CourseType course=studentUtil.toEnum(courseText);
-        Student student = service.add(requestData.getName(), requestData.getAge(),course);
-        StudentDetails response=studentUtil.toStudentDetails(student);
+        StudentDetails response = service.add(requestData);
         return response;
     }
 
@@ -43,15 +42,13 @@ public class StudentController {
     //@RequestMapping(path="/byid/{id}",method=RequestMethod.GET)
     @GetMapping("/byid/{id}")
     public StudentDetails findById(@PathVariable int id) throws Exception {
-        Student student = service.findById(id);
-        StudentDetails response=studentUtil.toStudentDetails(student);
+        StudentDetails response = service.findStudentDetailsById(id);
         return response;
     }
 
     @GetMapping("/all")
     public List<StudentDetails> fetchAll() {
-        List<Student> all = service.findAll();
-        List<StudentDetails>response= studentUtil.toListStudentDetails(all);
+        List<StudentDetails> response = service.findAll();
         return response;
     }
 
