@@ -1,8 +1,10 @@
-**layered architecture task , spring boot, hibernate, jpa**
+**layered architecture task , spring boot, hibernate, jpa, rest**
 
 sprint 1 - hashmap as storage
 
 sprint 2 - database as storage
+
+sprint 3 - Add restpoints
 
 Blogger{
 
@@ -41,6 +43,16 @@ changeBloggerName(id, newFirstName, newLastName)
 
 
 }
+
+
+Add restpoints
+
+1) add blogger
+
+2) find blogger by id
+
+3) Change blogger name
+
 
 Validations
 
