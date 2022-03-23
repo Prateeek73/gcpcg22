@@ -1,5 +1,7 @@
 package com.trainingapps.schoolms.entity;
 
+import com.trainingapps.schoolms.constants.CourseType;
+
 import java.util.Objects;
 
 public class Student {
@@ -8,10 +10,13 @@ public class Student {
     private String name;
     private int age;
 
-    public Student(int id, String name, int age){
+    private CourseType courseType;
+
+    public Student(int id, String name, int age, CourseType type){
         this.id=id;
         this.name = name;
         this.age=age;
+        this.courseType=type;
     }
 
 
@@ -37,6 +42,14 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public CourseType getCourseType() {
+        return courseType;
+    }
+
+    public void setCourseType(CourseType courseType) {
+        this.courseType = courseType;
     }
 
     @Override

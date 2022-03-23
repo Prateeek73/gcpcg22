@@ -1,6 +1,10 @@
 package com.trainingapps.schoolms.frontend;
 
 import java.util.*;
+
+import com.trainingapps.schoolms.constants.CourseType;
+import com.trainingapps.schoolms.dto.RegisterStudentRequest;
+import com.trainingapps.schoolms.dto.StudentDetails;
 import com.trainingapps.schoolms.entity.Student;
 import com.trainingapps.schoolms.exceptions.InvalidStudentAgeException;
 import com.trainingapps.schoolms.exceptions.InvalidStudentIdException;
@@ -15,56 +19,50 @@ import org.springframework.stereotype.Component;
 public class FrontEnd {
 
     @Autowired
-    private IStudentService service ;
+    private IStudentService service;
 
-    public void runUI(){
-    	try {
-        System.out.println("***adding students");
-        Student student1 =service.add("prateek",21);
-        Student student2 =service.add("amit",22);
-        display(student1);
-        display(student2);
-        System.out.println("***displaying student by id");
-        int student1Id=student1.getId();
-        Student found=service.findById(student1Id);
-        display(found);
-        System.out.println("****delete student by id");
-        service.deleteById(student1Id);
-        System.out.println("****displaying all elements in store");
-        List<Student>all=service.findAll();
-        displayAll(all);
-    	}catch(InvalidStudentIdException e) {
-    		//e.printStackTrace();
-    		System.err.println(e.getMessage());
-    	}
-    	catch(InvalidStudentAgeException e) {
-    		//e.printStackTrace();
-    		System.err.println(e.getMessage());
-        		
-    	}
-    	catch(InvalidStudentNameException e) {
-    		//e.printStackTrace();
-    		System.err.println(e.getMessage());
-        	
-    	}
-    	catch(StudentNotFoundException e) {
-    		//e.printStackTrace();
-    		System.err.println(e.getMessage());
-    	}
-    	catch(Exception e){
-    		System.err.println(e.getMessage());
-    	}
-    	
-      }
-    
-    void  displayAll(Collection<Student>students){
-      for(Student student:students){
-          display(student);
-      }
+    public void runUI() {
+        try {
+            System.out.println("***adding students");
+            RegisterStudentRequest requestData1 = new RegisterStudentRequest();
+            requestData1.setAge(21);
+            requestData1.setCourse("cse");
+            requestData1.setName("vedant");
+            StudentDetails student1 = service.add(requestData1);
+            RegisterStudentRequest requestData2 = new RegisterStudentRequest();
+            requestData2.setAge(21);
+            requestData2.setCourse("ece");
+            requestData2.setName("vibhor");
+
+            StudentDetails student2 = service.add(requestData2);
+            display(student1);
+            display(student2);
+            System.out.println("***displaying student by id");
+            int student1Id = student1.getId();
+            StudentDetails found = service.findStudentDetailsById(student1Id);
+            display(found);
+            System.out.println("****delete student by id");
+            service.deleteById(student1Id);
+            System.out.println("****displaying all elements in store");
+            List<StudentDetails> all = service.findAll();
+            displayAll(all);
+        }  catch (StudentNotFoundException e) {
+            //e.printStackTrace();
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
     }
 
-    void display(Student student){
-        System.out.println(student.getId()+"-"+student.getName()+"-"+student.getAge());
+    void displayAll(Collection<StudentDetails> students) {
+        for (StudentDetails student : students) {
+            display(student);
+        }
+    }
+
+    void display(StudentDetails student) {
+        System.out.println(student.getId() + "-" + student.getName() + "-" + student.getAge());
     }
 
 }

@@ -1,12 +1,16 @@
 package com.trainingapps.schoolms.service;
 
+import com.trainingapps.schoolms.constants.CourseType;
 import com.trainingapps.schoolms.dao.IStudentDao;
 import com.trainingapps.schoolms.dao.StudentDaoImpl;
+import com.trainingapps.schoolms.dto.RegisterStudentRequest;
+import com.trainingapps.schoolms.dto.StudentDetails;
 import com.trainingapps.schoolms.entity.Student;
 import com.trainingapps.schoolms.exceptions.InvalidStudentAgeException;
 import com.trainingapps.schoolms.exceptions.InvalidStudentIdException;
 import com.trainingapps.schoolms.exceptions.InvalidStudentNameException;
 import com.trainingapps.schoolms.exceptions.StudentNotFoundException;
+import com.trainingapps.schoolms.util.StudentUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -16,63 +20,55 @@ import java.util.List;
 @Component
 public class StudentServiceImpl implements IStudentService {
 
-	@Autowired
-	private IStudentDao dao;
+    @Autowired
+    private IStudentDao dao;
 
-	private int generatedId;
+    @Autowired
+    private StudentUtil studentUtil;
 
-	int generateId() {
-		return ++generatedId;
-	}
+    private int generatedId;
 
-	@Override
-	public Student add(String name, int age) 
-			throws InvalidStudentNameException, InvalidStudentAgeException {
-		validateName(name);
-		validateAge(age);
-		int id = generateId();
-		Student student = new Student(id, name, age);
-		dao.add(student);
-		return student;
-	}
+    int generateId() {
+        return ++generatedId;
+    }
 
-	@Override
-	public Student findById(int id)throws InvalidStudentIdException,StudentNotFoundException {
-		validateId(id);
-		Student student = dao.findById(id);
-		if(student==null) {
-			throw new StudentNotFoundException("student not found for id="+id);
-		}
-		return student;
-	}
+    @Override
+    public StudentDetails add(RegisterStudentRequest requestData) {
+        int id = generateId();
+        String courseText = requestData.getCourse();
+        CourseType course = studentUtil.toEnum(courseText);
+        Student student = new Student(id, requestData.getName(), requestData.getAge(), course);
+        dao.add(student);
+        StudentDetails response = studentUtil.toStudentDetails(student);
+        return response;
+    }
 
-	@Override
-	public void deleteById(int id) throws InvalidStudentIdException {
-		validateId(id);
-		dao.deleteById(id);
-	}
+    @Override
+    public Student findById(int id) throws StudentNotFoundException {
+        Student student = dao.findById(id);
+        if (student == null) {
+            throw new StudentNotFoundException("student not found for id=" + id);
+        }
+        return student;
+    }
 
-	@Override
-	public List<Student> findAll() {
-		List<Student> result = dao.findAll();
-		return result;
-	}
+    @Override
+    public StudentDetails findStudentDetailsById(int id) throws StudentNotFoundException {
+        Student student = findById(id);
+        StudentDetails response = studentUtil.toStudentDetails(student);
+        return response;
+    }
 
-	void validateName(String name) throws InvalidStudentNameException {
-		if (name == null || name.isEmpty() || name.length() < 2 || name.length() > 10) {
-			throw new InvalidStudentNameException("invalid name argument " + name);
-		}
-	}
+    @Override
+    public void deleteById(int id) {
+        dao.deleteById(id);
+    }
 
-	void validateAge(int age) throws InvalidStudentAgeException {
-		if (age < 5 || age > 50) {
-			throw new InvalidStudentAgeException("invalid age argument " + age);
-		}
-	}
-	
-	void validateId(int id) throws InvalidStudentIdException {
-		if(id<=0) {
-			throw new InvalidStudentIdException("invalid student id argument "+id);
-		}
-	}
+    @Override
+    public List<StudentDetails> findAll() {
+        List<Student> list = dao.findAll();
+        List<StudentDetails>desired=studentUtil.toListStudentDetails(list);
+        return desired;
+    }
+
 }
