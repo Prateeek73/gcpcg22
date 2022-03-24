@@ -1,36 +1,44 @@
 package com.trainingapps.schoolms.dao;
 
 import com.trainingapps.schoolms.entity.Student;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.*;
 
-@Component
-public class StudentDaoImpl implements IStudentDao{
+@Repository
+public class StudentDaoImpl implements IStudentDao {
 
-    private Map<Integer, Student>store=new HashMap<>();
+    @PersistenceContext
+    //   @Autowired
+    private EntityManager entityManager;
 
     @Override
     public void add(Student student) {
-     store.put(student.getId(), student);
+        entityManager.persist(student);
     }
 
     @Override
     public Student findById(int id) {
-       Student student= store.get(id);
-       return student;
+        Student student = entityManager.find(Student.class, id);
+        return student;
     }
 
     @Override
     public void deleteById(int id) {
-        store.remove(id);
+        Student student = findById(id);
+        entityManager.remove(student);
     }
 
     @Override
     public List<Student> findAll() {
-      Collection<Student> values=  store.values();
-       List<Student>list=new ArrayList<>();
-       list.addAll(values);
-       return list;
+        String queryText = "from Student";
+        TypedQuery<Student> query = entityManager.createQuery(queryText, Student.class);
+        List<Student> values = query.getResultList();
+        return values;
     }
 }
