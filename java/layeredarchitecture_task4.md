@@ -13,6 +13,9 @@ description : String
 
 type : JobType   (enum contants can be Dev,Testing,HR, Admin)
 
+
+createdBy: long // recruiter id
+
 ++ getters setters
 
 }
@@ -42,7 +45,10 @@ findJobDetailsById(long id):JobDetails
 changeJobType(ChangeJobTypeRequest requestdata)
 
 
+
 }
+
+
 
 
 Add restpoints
@@ -61,10 +67,30 @@ job description should be between 20-100letters
 job type cant be empty
 
 
-FrontEnd{
+Recruiter management MS
+
+Entity
+
+Recruiter
+
+{
+
+id: long
+
+name : String
+
+company: String
+
+age: int
 
 }
 
 
+IRecruiterService {
+
+addRecruiter(AddRecuiterRecquest request) : RecruiterDetails
+
+findRecruiterDetailsById(long recruiterId): RecruiterDetails
 
 
+}
