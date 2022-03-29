@@ -1,5 +1,6 @@
 package com.trainingapps.schoolms.departmentms.controllers;
 
+import com.trainingapps.schoolms.departmentms.dto.ChangeDepartmentNameRequest;
 import com.trainingapps.schoolms.departmentms.dto.CreateDepartmentRequest;
 import com.trainingapps.schoolms.departmentms.dto.DepartmentDetails;
 import com.trainingapps.schoolms.departmentms.service.IDepartmentService;
@@ -20,6 +21,11 @@ public class DepartmentController {
     @GetMapping("/byid/{id}")
     public DepartmentDetails findById(@PathVariable int id) throws Exception{
         return service.findDepartmentDetailsById(id);
+    }
+
+    @PutMapping("/change/name")
+    public DepartmentDetails changeName(@RequestBody ChangeDepartmentNameRequest request)throws Exception{
+      return service.changeName(request);
     }
 
 

@@ -1,5 +1,6 @@
 package com.trainingapps.schoolms.departmentms.service;
 
+import com.trainingapps.schoolms.departmentms.dto.ChangeDepartmentNameRequest;
 import com.trainingapps.schoolms.departmentms.dto.CreateDepartmentRequest;
 import com.trainingapps.schoolms.departmentms.dto.DepartmentDetails;
 import com.trainingapps.schoolms.departmentms.entity.Department;
@@ -41,6 +42,15 @@ public class DepartmentServiceImpl  implements IDepartmentService{
     public DepartmentDetails findDepartmentDetailsById(int id) throws DepartmentNotFoundException {
         Department department=findById(id);
         DepartmentDetails desired=departmentUtil.toDepartmentDetails(department);
+        return desired;
+    }
+
+    @Override
+    public DepartmentDetails changeName(ChangeDepartmentNameRequest request) throws DepartmentNotFoundException {
+        Department dept=findById(request.getDepartmentId());
+        dept.setName(request.getNewName()) ;
+        repository.save(dept);
+        DepartmentDetails desired=departmentUtil.toDepartmentDetails(dept);
         return desired;
     }
 }
