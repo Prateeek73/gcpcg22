@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -17,13 +19,22 @@ public class TraineeController {
         return ++generatedId;
     }
 
-
+/*
     @GetMapping("/byid/{id}")
     public Trainee fetchTrainee(@PathVariable("id") int idArg){
         Trainee trainee=store.get(idArg);
         return trainee;
+    }*/
+
+    //@RequestMapping(path="/byid/{id}",method=RequestMethod.GET)
+    @GetMapping("/byid/{id}")
+    public ResponseEntity<Trainee> fetchTrainee(@PathVariable("id") int idArg){
+        Trainee trainee=store.get(idArg);
+        ResponseEntity<Trainee> responseEntity=new ResponseEntity<>(trainee, HttpStatus.OK);
+        return responseEntity;
     }
 
+/*
     @PostMapping("/add")
     public Trainee addTrainee(@RequestBody Trainee requestData){
         int newId=generateId();
@@ -31,7 +42,17 @@ public class TraineeController {
         store.put(newId, requestData);
         return requestData;
     }
+*/
 
+    //@RequestMapping(path="/add",method=RequestMethod.POST)
+    @PostMapping("/add")
+    public ResponseEntity<Trainee> addTrainee(@RequestBody Trainee requestData){
+        int newId=generateId();
+        requestData.setId(newId);
+        store.put(newId, requestData);
+        ResponseEntity<Trainee>responseEntity=new ResponseEntity<>(requestData,HttpStatus.OK);
+        return responseEntity;
+    }
 
     @PutMapping("/update")
     public Trainee updateTrainee(@RequestBody Trainee newRequestData){

@@ -7,6 +7,8 @@ import com.trainingapps.schoolms.departmentms.entity.Department;
 import com.trainingapps.schoolms.departmentms.exceptions.DepartmentNotFoundException;
 import com.trainingapps.schoolms.departmentms.repository.IDepartmentRepository;
 import com.trainingapps.schoolms.departmentms.util.DepartmentUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl  implements IDepartmentService{
+    private static  final Logger Log= LoggerFactory.getLogger(DepartmentServiceImpl.class);
     @Autowired
     private IDepartmentRepository repository;
 
@@ -31,10 +34,13 @@ public class DepartmentServiceImpl  implements IDepartmentService{
 
     @Override
     public Department findById(int id) throws DepartmentNotFoundException {
+        Log.debug("inside findById id="+id);
         Optional<Department> optional=repository.findById(id);
         if(!optional.isPresent()){
+            Log.debug("inside findById  empty optional department was not fetched from database");
             throw new DepartmentNotFoundException("department nt found");
         }
+        Log.debug("inside findById ,department fetched from dtbase for id="+id);
         return optional.get();
     }
 
