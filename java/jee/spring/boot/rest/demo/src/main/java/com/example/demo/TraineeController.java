@@ -1,71 +1,48 @@
 package com.example.demo;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@RequestMapping("/trainees")
-@RestController
+@Controller
 public class TraineeController {
+    private Map<Integer, Trainee> store = new HashMap<>();
 
-    private Map<Integer,Trainee>store=new HashMap<>();
 
-    int generatedId;
+    public TraineeController() {
+        Trainee trainee1 = new Trainee();
+        trainee1.setId(1);
+        trainee1.setAge(21);
+        trainee1.setName("subham");
+        store.put(1, trainee1);
 
-    public int generateId(){
-        return ++generatedId;
+        Trainee trainee2 = new Trainee();
+        trainee2.setId(2);
+        trainee2.setAge(21);
+        trainee2.setName("prateek");
+        store.put(2, trainee2);
+
+
     }
 
-/*
-    @GetMapping("/byid/{id}")
-    public Trainee fetchTrainee(@PathVariable("id") int idArg){
-        Trainee trainee=store.get(idArg);
-        return trainee;
-    }*/
 
-    //@RequestMapping(path="/byid/{id}",method=RequestMethod.GET)
-    @GetMapping("/byid/{id}")
-    public ResponseEntity<Trainee> fetchTrainee(@PathVariable("id") int idArg){
-        Trainee trainee=store.get(idArg);
-        ResponseEntity<Trainee> responseEntity=new ResponseEntity<>(trainee, HttpStatus.OK);
-        return responseEntity;
+    @GetMapping("/greet/view")
+    public ModelAndView greet() {
+        String message = "Welcome to spring webmvc";
+        ModelAndView modelAndView = new ModelAndView("welcome", "msg", message);
+        return modelAndView;
     }
 
-/*
-    @PostMapping("/add")
-    public Trainee addTrainee(@RequestBody Trainee requestData){
-        int newId=generateId();
-        requestData.setId(newId);
-        store.put(newId, requestData);
-        return requestData;
-    }
-*/
-
-    //@RequestMapping(path="/add",method=RequestMethod.POST)
-    @PostMapping("/add")
-    public ResponseEntity<Trainee> addTrainee(@RequestBody Trainee requestData){
-        int newId=generateId();
-        requestData.setId(newId);
-        store.put(newId, requestData);
-        ResponseEntity<Trainee>responseEntity=new ResponseEntity<>(requestData,HttpStatus.OK);
-        return responseEntity;
-    }
-
-    @PutMapping("/update")
-    public Trainee updateTrainee(@RequestBody Trainee newRequestData){
-      Trainee trainee=store.get(newRequestData.getId());
-      trainee.setAge(newRequestData.getAge());
-      trainee.setName(newRequestData.getName());
-      return trainee;
-    }
-
-    @DeleteMapping("/delete/byid/{id}")
-    public String deleteById(@PathVariable int id){
-        store.remove(id);
-        return "trainee delete for id="+id;
+    // /trainees/trainee/view?id=1
+    @GetMapping("/trainees/trainee/view")
+    public ModelAndView fetchTraineeDetails(@RequestParam("id") int id) {
+        Trainee trainee = store.get(id);
+        ModelAndView modelAndView = new ModelAndView("traineedetails", "trainee", trainee);
+        return modelAndView;
     }
 
 }
