@@ -29,8 +29,6 @@ public class App3 {
         String user = "postgres", password = "scooby";
 
         connection = DriverManager.getConnection(url, user, password);
-        //create statement
-
 
         Student student1 = new Student();
         student1.setId(1);
