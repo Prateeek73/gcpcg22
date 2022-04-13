@@ -6,8 +6,10 @@ package com.example.demo;
 //import org.postgresql.Driver;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class App {
+public class App1 {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         //  Driver driver=new Driver();
         //     DriverManager.registerDriver(driver);
@@ -26,18 +28,21 @@ public class App {
         int rowsUpdated=statement.executeUpdate(insertQueryText);
         System.out.println("rows updated="+rowsUpdated);
 
-
         String fetchQueryText = "select * from students";
         ResultSet resultSet = statement.executeQuery(fetchQueryText);
+        List<Student> students=new ArrayList<>();
+
         while (resultSet.next()) {
             long id = resultSet.getLong("id");
             String username = resultSet.getString("username");
             int age = resultSet.getInt("age");
             System.out.println("id=" + id + " username=" + username + " age=" + age);
+            Student student=new Student();
+            student.setId(id);
+            student.setUsername(username);
+            student.setAge(age);
+            students.add(student);
         }
-
-
-
 
 
         connection.close();
